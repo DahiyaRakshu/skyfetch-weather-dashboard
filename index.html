@@ -11,9 +11,24 @@
         <h1>🌤️ SkyFetch</h1>
         <p class="tagline">Your Personal Weather Dashboard</p>
         
-        <div id="weather-display">
-            <p class="loading">Loading weather data...</p>
+        <!-- Search Section -->
+        <div class="search-section">
+            <input 
+                type="text" 
+                id="city-input" 
+                placeholder="Enter city name..." 
+                autocomplete="off"
+            >
+            <button id="search-btn">🔍 Search</button>
         </div>
+        
+        <!-- Current Weather -->
+        <div id="weather-display">
+            <p class="loading">Search a city to see weather</p>
+        </div>
+
+        <!-- ⭐ NEW: 5-Day Forecast Section -->
+        <div id="forecast-container" class="forecast-grid"></div>
     </div>
 
     <!-- Axios CDN -->
@@ -21,5 +36,25 @@
     
     <!-- Your JavaScript -->
     <script src="app.js"></script>
+
+    <!-- ⭐ Search Logic -->
+    <script>
+        const input = document.getElementById('city-input');
+        const button = document.getElementById('search-btn');
+
+        button.addEventListener('click', () => {
+            const city = input.value.trim();
+            if (city) {
+                app.getWeather(city);
+            }
+        });
+
+        // Enter key support (bonus marks)
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                button.click();
+            }
+        });
+    </script>
 </body>
 </html>
